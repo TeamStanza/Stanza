@@ -1,2 +1,0 @@
-# Created by Misawa Momoha
-python-3.7.9
