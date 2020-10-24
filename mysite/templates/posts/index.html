@@ -145,13 +145,6 @@ Made a templates extends by Yamamoto Sota
                 <p class="font2"><span class="val-book-title">書名: </span></p>
               </div>
             </div>
-            {% if review %}
-            <div class="review">
-                <form action="{% url 'review' book.id %}">
-                    <input id = 'review_edit' type="submit" value="書評"/>
-                </form>
-            </div>
-            {% endif %}
           </div>
       </template>
 
