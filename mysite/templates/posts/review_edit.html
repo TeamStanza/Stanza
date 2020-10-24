@@ -31,7 +31,11 @@ Masato Umakoshi: Modify for backend.
                     </p>
                     <div class="book-info">
                         <div class="cover-img">
-                            <img src="{{ book.cover_path }}" class="val-book-cover-path">
+                            {% if book.cover_path == "../static/img/book.png" %}
+                                <img src="../{{ book.cover_path }}" class="val-book-cover-path">
+                            {% else %}
+                                <img src="{{ book.cover_path }}" class="val-book-cover-path">
+                            {% endif %}
                         </div>
                         <div class="book-detail">
                             <div class="author">

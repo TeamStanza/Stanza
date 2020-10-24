@@ -31,7 +31,11 @@
                 {% for post, wokashi_sum, ahare_sum, book, bookmark_flag in zipped_post %}
                     <div class="post-box">
                         <div class="cover-img">
-                            <img src="{{ book.cover_path }}" class="val-book-cover-path">
+                            {% if book.cover_path == "../static/img/book.png" %}
+                                <img src="../{{ book.cover_path }}" class="val-book-cover-path">
+                            {% else %}
+                                <img src="{{ book.cover_path }}" class="val-book-cover-path">
+                            {% endif %}
                         </div>
 
                         <div class="box-primary">
