@@ -2,7 +2,7 @@
 
 ## デプロイ
 
-Heroku: django_on_docker
+Heroku:
 - https://team-stanza.herokuapp.com/
 
 ## データベース
