@@ -3,7 +3,7 @@
 ## デプロイ
 
 Heroku: django_on_docker
-- http://radiant-badlands-82017.herokuapp.com/
+- https://team-stanza.herokuapp.com/
 
 ## データベース
 - マイグレーションの作成: `python manage.py makemigrations`
