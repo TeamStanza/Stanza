@@ -37,7 +37,7 @@ Heroku:
 ## 旧stanzaからの変更点
 - アカウント別投稿一覧ページの作成
 - 書評投稿システムを構築
-- 各種ファイルにおいてデザインを大幅に変更
+- 各種ファイルにおいてデザインを大幅に変更！
 
 ### 変更ファイル
 - view.py
@@ -51,4 +51,3 @@ Heroku:
     - review.html
     - review_book_select.html
     - list.html
-    - review
