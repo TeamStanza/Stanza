@@ -158,8 +158,8 @@ h3 {
   position: absolute;
   left: 0;
   top: 0;
-  width: 2.5rem;
-  height: 2.5rem;
+  /*width: 2.5rem;*/
+  height: 100%;
   opacity: 0.6;
   -webkit-transition: width 0.2s ease, height 0.2s ease;
   -moz-transition: width 0.2s ease, height 0.2s ease;
@@ -169,16 +169,16 @@ h3 {
 }
 
 .wokashi .wokashi-btn0:active {
-  width: 4.0rem;
-  height: 4.0rem;
+  /*width: 4.0rem;*/
+  height: 100%;
 }
 
 .wokashi .wokashi-btn {
   position: absolute;
   left: 0;
   top: 0;
-  width: 2.5rem;
-  height: 2.5rem;
+  /*width: 2.5rem;*/
+  height: 100%;
   -webkit-transition: width 0.2s ease, height 0.2s ease;
   -moz-transition: width 0.2s ease, height 0.2s ease;
   -o-transition: width 0.2s ease, height 0.2s ease;
@@ -187,8 +187,8 @@ h3 {
 }
 
 .wokashi .wokashi-btn:active {
-  width: 4.0rem;
-  height: 4.0rem;
+  /*width: 4.0rem;*/
+  height: 100%;
 }
 
 .wokashi .wokashi-count {
@@ -205,7 +205,7 @@ h3 {
   position: absolute;
   top: 6rem;
   width: 4rem;
-  height: 2.5rem;
+  height: 3rem;
   left: 0;
   direction: ltr;
 }
@@ -214,8 +214,8 @@ h3 {
   position: absolute;
   left: 0;
   top: 0;
-  width: 2.5rem;
-  height: 2.5rem;
+  /*width: 2.5rem;*/
+  height: 100%;
   opacity: 0.6;
   -webkit-transition: width 0.2s ease, height 0.2s ease;
   -moz-transition: width 0.2s ease, height 0.2s ease;
@@ -225,16 +225,16 @@ h3 {
 }
 
 .ahare .ahare-btn0:active {
-  width: 4.0rem;
-  height: 4.0rem;
+  /*width: 4.0rem;*/
+  height: 100%;
 }
 
 .ahare .ahare-btn {
   position: absolute;
   left: 0;
   top: 0;
-  width: 2.5rem;
-  height: 2.5rem;
+  /*width: 2.5rem;*/
+  height: 100%;
   -webkit-transition: width 0.2s ease, height 0.2s ease;
   -moz-transition: width 0.2s ease, height 0.2s ease;
   -o-transition: width 0.2s ease, height 0.2s ease;
@@ -243,8 +243,8 @@ h3 {
 }
 
 .ahare .ahare-btn:active {
-  width: 4.0rem;
-  height: 4.0rem;
+  /*width: 4.0rem;*/
+  height: 100%;
 }
 
 .ahare .ahare-count {

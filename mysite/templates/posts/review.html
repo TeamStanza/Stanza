@@ -66,13 +66,13 @@
                                 {% if wokashi_sum is None %}
                                     <button onclick="wokashi_create('{{ post.id }}')" class="wokashi-btn-base">
                                         <img class="wokashi-btn0" id="wokashi-img{{ post.id }}"
-                                             src="{% static 'posts/img/wokashi_0.svg' %}">
+                                             src="{% static 'posts/img/wokashi_0.png' %}">
                                     </button>
                                     <span class="wokashi-count" id="wokashi-sum{{ post.id }}">0</span>
                                 {% else %}
                                     <button onclick="wokashi_create('{{ post.id }}')" class="wokashi-btn-base">
                                         <img class="wokashi-btn" id="wokashi-img{{ post.id }}"
-                                             src="{% static 'posts/img/wokashi_1.svg' %}">
+                                             src="{% static 'posts/img/wokashi_1.png' %}">
                                     </button>
                                     <span class="wokashi-count" id="wokashi-sum{{ post.id }}"> {{ wokashi_sum }} </span>
                                 {% endif %}
@@ -82,13 +82,13 @@
                                 {% if ahare_sum is None %}
                                     <button onclick="ahare_create('{{ post.id }}')" class="ahare-btn-base">
                                         <img class="ahare-btn0" id="ahare-img{{ post.id }}"
-                                             src="{% static 'posts/img/ahare_0.svg' %}">
+                                             src="{% static 'posts/img/ahare_0.png' %}">
                                     </button>
                                     <span class="ahare-count" id="ahare-sum{{ post.id }}">0</span>
                                 {% else %}
                                     <button onclick="ahare_create('{{ post.id }}')" class="ahare-btn-base">
                                         <img class="ahare-btn" id="ahare-img{{ post.id }}"
-                                             src="{% static 'posts/img/ahare_1.svg' %}">
+                                             src="{% static 'posts/img/ahare_1.png' %}">
                                     </button>
                                     <span class="ahare-count" id="ahare-sum{{ post.id }}"> {{ ahare_sum }} </span>
                                 {% endif %}
@@ -232,13 +232,13 @@
                                     const img = clone.querySelector(".wokashi-btn-base").querySelector('img');
                                     img.setAttribute("class", "wokashi-btn0");
                                     img.setAttribute("id", "wokashi-img" + info['post_id'])
-                                    img.setAttribute("src", "{% static 'posts/img/wokashi_0.svg' %}");
+                                    img.setAttribute("src", "{% static 'posts/img/wokashi_0.png' %}");
                                 } else {
                                     clone.querySelector(".wokashi-count").innerHTML = info['wokashi_sum'];
                                     const img = clone.querySelector(".wokashi-btn-base").querySelector('img');
                                     img.setAttribute("class", "wokashi-btn");
                                     img.setAttribute("id", "wokashi-img" + info['post_id'])
-                                    img.setAttribute("src", "{% static 'posts/img/wokashi_1.svg' %}");
+                                    img.setAttribute("src", "{% static 'posts/img/wokashi_1.png' %}");
                                 }
 
                                 clone.querySelector(".ahare-btn-base").setAttribute("value", info['post_id']);
@@ -249,13 +249,13 @@
                                     const img = clone.querySelector(".ahare-btn-base").querySelector('img');
                                     img.setAttribute("class", "ahare-btn0");
                                     img.setAttribute("id", "ahare-img" + info['post_id'])
-                                    img.setAttribute("src", "{% static 'posts/img/ahare_0.svg' %}");
+                                    img.setAttribute("src", "{% static 'posts/img/ahare_0.png' %}");
                                 } else {
                                     clone.querySelector(".ahare-count").innerHTML = info['ahare_sum'];
                                     const img = clone.querySelector(".ahare-btn-base").querySelector('img');
                                     img.setAttribute("class", "ahare-btn");
                                     img.setAttribute("id", "ahare-img" + info['post_id'])
-                                    img.setAttribute("src", "{% static 'posts/img/ahare_1.svg' %}");
+                                    img.setAttribute("src", "{% static 'posts/img/ahare_1.png' %}");
                                 }
 
                                 clone.querySelector(".val-book-author").innerHTML += info['book_author'];
@@ -282,7 +282,7 @@
                         span.innerHTML = wokashi_sum;
                         const img = document.getElementById("wokashi-img" + post_id);
                         img.setAttribute("class", "wokashi-btn");
-                        img.setAttribute("src", "{% static 'posts/img/wokashi_1.svg' %}");
+                        img.setAttribute("src", "{% static 'posts/img/wokashi_1.png' %}");
                     };
                 };
 
@@ -300,7 +300,7 @@
                         span.innerHTML = ahare_sum;
                         const img = document.getElementById("ahare-img" + post_id);
                         img.setAttribute("class", "ahare-btn");
-                        img.setAttribute("src", "{% static 'posts/img/ahare_1.svg' %}");
+                        img.setAttribute("src", "{% static 'posts/img/ahare_1.png' %}");
                     };
                 };
             </script>

@@ -97,15 +97,19 @@ def index(request):
     posts = Post.objects.filter(is_deleted=False)
     posts_comments_updated_at = []
     for p in posts:
+        review = Review.objects.filter(user_id=p.user_id, book_id=p.book_id)
+        review = not len(review) == 0
         is_comment = p.comment_set.exists()
         if is_comment:
-            posts_comments_updated_at.append([p, p.comment_set.all().order_by('updated_at').reverse().first().updated_at])
+            posts_comments_updated_at.append([p, p.comment_set.all().order_by('updated_at').reverse().first().updated_at, review])
         else:
-            posts_comments_updated_at.append([p, p.updated_at])
+            posts_comments_updated_at.append([p, p.updated_at, review])
     sorted_data = sorted(posts_comments_updated_at, key=lambda x: x[1], reverse=True)
     posts = list(map(lambda x: x[0], sorted_data))[:10]
+    review = list(map(lambda x:x[2], sorted_data))[:10]
 
-    zipped_post = _get_zipped_post(posts, request)
+    print(sorted_data)
+    zipped_post = _get_zipped_post_enhanced(posts, request, review)
 
     params = {
         "title": "ポスト一覧",
@@ -626,7 +630,6 @@ def postList(request):
     is_review_exist = []
     for p in posts:
         review = Review.objects.filter(user_id=request.user, book_id=p.book_id)
-        print(len(review))
         is_review_exist.append(len(review) == 0)
 
         is_comment = p.comment_set.exists()
@@ -731,3 +734,4 @@ def review_book_select(request):
         "tag": TagForm(initial={'tag':[]})
     }
     return render(request, "posts/review_book_select.html", params)
+
