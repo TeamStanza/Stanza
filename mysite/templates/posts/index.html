@@ -98,7 +98,7 @@ Made a templates extends by Yamamoto Sota
                             </div>
                             {% if review %}
                                 <div class="review">
-                                    <form action="{% url 'review' post.user_id.id book.id %}">
+                                    <form action="{% url 'review' post.id %}">
                                         <input id='review_edit' type="submit" value="書評"/>
                                     </form>
                                 </div>

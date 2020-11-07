@@ -684,13 +684,14 @@ def review_create(request, num):
     review.save()
     return redirect(to=f'/posts/review/{post.book_id.id}')
 
-def review(request, user_num, book_num):
+def review(request, num):
     print("this is review page !!!!!!!!!!!!!!!!!!!!!")
     posts = Post.objects.filter(is_deleted=False)
-    book = Book.objects.get(id=book_num)
-    user = User.objects.get(id=user_num)
+    post = Post.objects.get(id=num)
+    book = Book.objects.get(id=post.book_id.id)
+    user = User.objects.get(id=post.user_id.id)
     posts = list(filter(lambda x: x.user_id == user and book.title == x.book_id.title, posts))
-    reviews = Review.objects.filter(user_id=request.user, book_id=book)
+    reviews = Review.objects.filter(user_id=user, book_id=book)
     posts_comments_updated_at = []
     for p in posts:
         is_comment = p.comment_set.exists()
@@ -708,7 +709,8 @@ def review(request, user_num, book_num):
         "zipped_post": zipped_post,
         "tag": TagForm(initial={'tag':[]}),
         "book": book,
-        "id": book_num,
+        "id": book.id,
+        "user": user,
         "review": reviews.last()
     }
     return render(request, "posts/review.html", params)
