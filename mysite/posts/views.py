@@ -93,29 +93,8 @@ def _get_zipped_post_enhanced(posts, request, is_review_exist):
 # Takahashi Shunichi
 # Umakoshi Masato
 def index(request):
-    # TODO Fix naming: book_id.id is too wierd.
-    posts = Post.objects.filter(is_deleted=False)
-    posts_comments_updated_at = []
-    for p in posts:
-        review = Review.objects.filter(user_id=p.user_id, book_id=p.book_id)
-        review = not len(review) == 0
-        is_comment = p.comment_set.exists()
-        if is_comment:
-            posts_comments_updated_at.append([p, p.comment_set.all().order_by('updated_at').reverse().first().updated_at, review])
-        else:
-            posts_comments_updated_at.append([p, p.updated_at, review])
-    sorted_data = sorted(posts_comments_updated_at, key=lambda x: x[1], reverse=True)
-    posts = list(map(lambda x: x[0], sorted_data))[:10]
-    review = list(map(lambda x:x[2], sorted_data))[:10]
-
-    zipped_post = _get_zipped_post_enhanced(posts, request, review)
-
-    params = {
-        "title": "ポスト一覧",
-        "zipped_post": zipped_post,
-        "tag": TagForm(initial={'tag':[]})
-    }
-    return render(request, "posts/index.html", params)
+    param = posting(request, "posts/index.html")
+    return render(param[0], param[1], param[2])
 
 
 # Takahashi Shunichi
@@ -646,7 +625,7 @@ def postList(request):
         "zipped_post": zipped_post,
         "tag": TagForm(initial={'tag':[]})
     }
-    return render(request, "posts/list.html", params)
+    return render(request, "posts/index.html", params)
 
 def review_edit(request, num):
     print("this is review_edit page !!!!!!!!!!!!!!!!!!!!!")
@@ -694,15 +673,18 @@ def review(request, num):
     reviews = Review.objects.filter(user_id=user, book_id=book)
     posts_comments_updated_at = []
     for p in posts:
+        review = Review.objects.filter(user_id=p.user_id, book_id=p.book_id)
+        review = not len(review) == 0
         is_comment = p.comment_set.exists()
         if is_comment:
-            posts_comments_updated_at.append([p, p.comment_set.all().order_by('updated_at').reverse().first().updated_at])
+            posts_comments_updated_at.append([p, p.comment_set.all().order_by('updated_at').reverse().first().updated_at, review])
         else:
-            posts_comments_updated_at.append([p, p.updated_at])
+            posts_comments_updated_at.append([p, p.updated_at, review])
     sorted_data = sorted(posts_comments_updated_at, key=lambda x: x[1], reverse=True)
     posts = list(map(lambda x: x[0], sorted_data))[:10]
+    review = list(map(lambda x: x[2], sorted_data))[:10]
 
-    zipped_post = _get_zipped_post(posts, request)
+    zipped_post = _get_zipped_post_enhanced(posts, request, review)
 
     params = {
         "title": "ポスト一覧",
@@ -716,24 +698,29 @@ def review(request, num):
     return render(request, "posts/review.html", params)
 
 def review_book_select(request):
+    param = posting(request, "posts/review_book_select.html")
+    return render(param[0],param[1],param[2])
+
+def posting(request, html_file):
     posts = Post.objects.filter(is_deleted=False)
-    posts = list(filter(lambda x: x.user_id == request.user, posts))
     posts_comments_updated_at = []
     for p in posts:
+        review = Review.objects.filter(user_id=p.user_id, book_id=p.book_id)
+        review = not len(review) == 0
         is_comment = p.comment_set.exists()
         if is_comment:
-            posts_comments_updated_at.append([p, p.comment_set.all().order_by('updated_at').reverse().first().updated_at])
+            posts_comments_updated_at.append([p, p.comment_set.all().order_by('updated_at').reverse().first().updated_at, review])
         else:
-            posts_comments_updated_at.append([p, p.updated_at])
+            posts_comments_updated_at.append([p, p.updated_at, review])
     sorted_data = sorted(posts_comments_updated_at, key=lambda x: x[1], reverse=True)
     posts = list(map(lambda x: x[0], sorted_data))[:10]
+    review = list(map(lambda x:x[2], sorted_data))[:10]
 
-    zipped_post = _get_zipped_post(posts, request)
+    zipped_post = _get_zipped_post_enhanced(posts, request, review)
 
     params = {
         "title": "ポスト一覧",
         "zipped_post": zipped_post,
         "tag": TagForm(initial={'tag':[]})
     }
-    return render(request, "posts/review_book_select.html", params)
-
+    return request, html_file, params

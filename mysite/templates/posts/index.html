@@ -22,6 +22,8 @@ Made a templates extends by Yamamoto Sota
 {% block contents %}
     <div id="content">
         <main>
+        {% block title %}
+        {% endblock %}
             <div class="scroll-list" id="timeline">
                 {% for post, wokashi_sum, ahare_sum, book, bookmark_flag, review in zipped_post %}
                     <div class="post-box">
@@ -106,8 +108,10 @@ Made a templates extends by Yamamoto Sota
                         </div>
                     </div>
                 {% endfor %}
-            </div>
 
+            </div>
+            {% block review %}
+            {% endblock %}
             <!-- スクロールして読み込んだ投稿に使うテンプレート -->
             <!-- これをJavaScriptで複製して読み込んだ投稿を表示する -->
             <template id="post-box-template">
@@ -155,6 +159,12 @@ Made a templates extends by Yamamoto Sota
                             <div class="book-name">
                                 <p class="font2"><span class="val-book-title">書名: </span></p>
                             </div>
+                        </div>
+
+                        <div class="review">
+                            <form class="review_form">
+                                <input type="submit" value="書評"/>
+                            </form>
                         </div>
                     </div>
             </template>
@@ -225,7 +235,6 @@ Made a templates extends by Yamamoto Sota
                                 // console.log(info);
                                 const template = document.getElementById("post-box-template");
                                 const clone = template.content.cloneNode(true);
-
                                 // in <div id="primary-box"></div>
                                 clone.querySelector(".val-book-cover-path").setAttribute("src", info['book_cover_path']);
                                 clone.querySelector(".val-post-content").innerHTML = info['post_content'];
@@ -235,7 +244,7 @@ Made a templates extends by Yamamoto Sota
 
                                 // in <div id="secondary-box"></div>
                                 clone.querySelector(".bookmark-btn").setAttribute("value", info['post_id']);
-                                console.log(info['bookmark_flag']);
+                                {#console.log(info['bookmark_flag']);#}
                                 if (info['bookmark_flag']) {
                                     clone.querySelector(".bookmark-btn-img").setAttribute("src", "{% static 'posts/img/bookmark2.svg' %}");
                                 } else {
@@ -275,6 +284,12 @@ Made a templates extends by Yamamoto Sota
                                     img.setAttribute("class", "ahare-btn");
                                     img.setAttribute("id", "ahare-img" + info['post_id'])
                                     img.setAttribute("src", "{% static 'posts/img/ahare_1.png' %}");
+                                }
+                                var review = clone.querySelector(".review_form");
+                                if  (info['review']){
+                                    review.setAttribute("action", "{% url 'review' 0 %}".replace(/0/, info['post_id']) );
+                                }else{
+                                    review.remove();
                                 }
 
                                 clone.querySelector(".val-book-author").innerHTML += info['book_author'];
