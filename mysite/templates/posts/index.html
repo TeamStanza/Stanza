@@ -98,9 +98,9 @@ Made a templates extends by Yamamoto Sota
                             </div>
                             {% if review %}
                                 <div class="review">
-                                  <form action="{% url 'review' book.id %}">
-                                      <input id = 'review_edit' type="submit" value="書評"/>
-                                  </form>
+                                    <form action="{% url 'review' post.user_id.id book.id %}">
+                                        <input id='review_edit' type="submit" value="書評"/>
+                                    </form>
                                 </div>
                             {% endif %}
                         </div>
@@ -157,13 +157,6 @@ Made a templates extends by Yamamoto Sota
                             </div>
                         </div>
                     </div>
-{#                    {% if review %}#}
-{#                        <div class="review">#}
-{#                            <form action="{% url 'review' book.id %}">#}
-{#                                <input id='review_edit' type="submit" value="書評"/>#}
-{#                            </form>#}
-{#                        </div>#}
-{#                    {% endif %}#}
             </template>
 
             <!-- Post form -->

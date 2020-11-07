@@ -108,7 +108,6 @@ def index(request):
     posts = list(map(lambda x: x[0], sorted_data))[:10]
     review = list(map(lambda x:x[2], sorted_data))[:10]
 
-    print(sorted_data)
     zipped_post = _get_zipped_post_enhanced(posts, request, review)
 
     params = {
@@ -685,11 +684,12 @@ def review_create(request, num):
     review.save()
     return redirect(to=f'/posts/review/{post.book_id.id}')
 
-def review(request, num):
+def review(request, user_num, book_num):
     print("this is review page !!!!!!!!!!!!!!!!!!!!!")
     posts = Post.objects.filter(is_deleted=False)
-    book = Book.objects.get(id=num)
-    posts = list(filter(lambda x: x.user_id == request.user and book.title == x.book_id.title, posts))
+    book = Book.objects.get(id=book_num)
+    user = User.objects.get(id=user_num)
+    posts = list(filter(lambda x: x.user_id == user and book.title == x.book_id.title, posts))
     reviews = Review.objects.filter(user_id=request.user, book_id=book)
     posts_comments_updated_at = []
     for p in posts:
@@ -708,7 +708,7 @@ def review(request, num):
         "zipped_post": zipped_post,
         "tag": TagForm(initial={'tag':[]}),
         "book": book,
-        "id": num,
+        "id": book_num,
         "review": reviews.last()
     }
     return render(request, "posts/review.html", params)

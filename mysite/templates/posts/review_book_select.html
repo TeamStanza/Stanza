@@ -93,7 +93,7 @@
                             </div>
                             {% if review %}
                             <div class="review">
-                                <form action="{% url 'review' book.id %}">
+                                <form action="{% url 'review' post.user_id.id book.id %}">
                                     <input id = 'review_edit' type="submit" value="書評"/>
                                 </form>
                             </div>
